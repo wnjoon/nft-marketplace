@@ -37,5 +37,4 @@ fi
 
 
 
-echo "Wait for geth open (pow) ....."
 
