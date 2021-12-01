@@ -5,4 +5,4 @@
 - Stop : ./network.sh stop
 ### Mining 
 - Start : ./mining.sh start
-= Stop : ./mining.sh stop
+- Stop : ./mining.sh stop
