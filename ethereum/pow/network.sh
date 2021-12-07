@@ -25,7 +25,8 @@ elif [ "${OPTION}" = "stop" ]; then
 
     ./mining.sh stop
     ps -ef | grep geth | grep pow-chain-dir | grep -v grep | awk '{print $2}' | xargs kill -9
-
+    rm -Rf ./pow-chain-dir
+    
 else
     echo "Not Correct Command"
 fi
