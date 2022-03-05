@@ -20,7 +20,6 @@ public class MyERC721Service {
      */
     public String mint(MyERC721Request request) throws Exception {
         
-        
         NetworkConnector nc = new NetworkConnector(request.getMyPrivateKey());
         MyERC721 token = MyERC721.load(
             request.getErc721Address(),
@@ -43,7 +42,6 @@ public class MyERC721Service {
      */
     public BigInteger getBalance(MyERC721Request request) throws Exception {
         
-
         NetworkConnector nc = new NetworkConnector(request.getMyPrivateKey());
         
         MyERC721 token = MyERC721.load(
@@ -99,6 +97,7 @@ public class MyERC721Service {
      * 특정 사용자가 보유하고 있는 ERC721 토큰 목록 
      */
     public List<String> getTokens(MyERC721Request request) throws Exception {
+        
         NetworkConnector nc = new NetworkConnector(request.getMyPrivateKey());
 
         MyERC721 token = MyERC721.load(
