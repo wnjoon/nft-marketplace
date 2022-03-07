@@ -1,7 +1,7 @@
-package com.exercise.token.controller;
+package com.exercise.marketplace.token.controller;
 
-import com.exercise.request.MyERC20Request;
-import com.exercise.token.service.MyERC20Service;
+import com.exercise.marketplace.token.request.MyERC20Request;
+import com.exercise.marketplace.token.service.MyERC20Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +20,14 @@ public class MyERC20Controller {
         this.service = service;
     }
 
-    @PostMapping("balance") 
+    @PostMapping("/balance") 
     public String getBalance(@RequestBody MyERC20Request request) throws Exception {
         return service.getBalance(request).toString();
     }
 
-    @PostMapping("transfer")
+    @PostMapping("/transfer")
     public String transfer(@RequestBody MyERC20Request request) throws Exception {
-        return service.transfer(request);
+        return service.transfer(request); 
     }
     
 }

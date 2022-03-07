@@ -2,3 +2,6 @@
 pow-chain-dir
 poa-chain-dir
 dev-chain-dir
+
+# Database data
+marketplace/database/postgresql/data

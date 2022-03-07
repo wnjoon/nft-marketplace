@@ -32,10 +32,15 @@ $ ./network.sh start (stop)
 - 경로 : [smartcontract/contracts](smartcontract/contracts)
 - 목록 : [ERC20](smartcontract/contracts/MyERC20.sol), [ERC721](smartcontract/contracts/MyERC721.sol)
 
-### 2.2. 자바 Wrapper Class 생성
+### 2.2. 배포(migrate)
+- 솔리디티 파일을 이더리움 네트워크에 배포
+- 경로 : [smartcontract/deploy.sh](smartcontract/deploy.sh)
+	- <u>본 소스에서 진행되는 PoA, PoW는 모두 testnetwork 태그 이하에서 실행된다.</u>
+### 2.3. 자바 Wrapper Class 생성
 - 솔리디티 기반의 스마트 컨트랙트를 자바에서 직접 사용할 수 있도록 클래스 형태로 변환하는 기능
 - Web3j를 사용하기 위해 변환한다.
 - 경로 : [smartcontract/contracts/scripts/generateWrapperClass.sh](smartcontract/contracts/scripts/generateWrapperClass.sh)
+
 
 <br>
 
@@ -73,6 +78,11 @@ $ ./network.sh start (stop)
 ```
 
 ### 3.2. 디렉토리
+
+* [database](marketplace/database/postgresql)
+	- 마켓플레이스 응용계층과 연결되는 데이터베이스를 다룬다.
+	- <u>응용 실행 전에 꼭 데이터베이스를 활성화하도록 한다.</u>
+	- 실행방법 : [README.md](marketplace/database/postgresql/README.md)
 
 * [contract](marketplace/src/main/java/com/exercise/contract)
     - WrapperClass를 이용해서 클래스 형태로 변환한 스마트 컨트랙트 
