@@ -2,10 +2,12 @@ package com.exercise.marketplace.token.service;
 
 import java.math.BigInteger;
 
+import javax.annotation.PostConstruct;
+
 import com.exercise.contract.MyERC20;
-import com.exercise.marketplace.login.model.UserInfoDto;
-import com.exercise.marketplace.login.service.UserService;
 import com.exercise.marketplace.token.request.MyERC20Request;
+import com.exercise.marketplace.user.model.UserInfo;
+import com.exercise.marketplace.user.service.UserService;
 import com.exercise.util.NetworkConnector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +20,28 @@ public class MyERC20Service {
 
     @Autowired
     private Environment env; 
-    
+
     @Autowired
     private UserService userService;
+
+    private String erc20Address;
+
+    @PostConstruct
+    public void setupTokenContract() throws InterruptedException {
+        erc20Address = env.getProperty("ca.erc20");
+    }
+    
     /*
      * getBalance
      * 계정의 잔여 ERC20 토큰 갯수 조회
      */
     public BigInteger getBalance(MyERC20Request request) throws Exception {
+       
+        UserInfo user = userService.getUser(request.getMyId());        
 
-        String erc20Address = env.getProperty("ca.erc20");
-        
-        UserInfoDto user = userService.getUserInfo(request.getMyId());
-        NetworkConnector nc = new NetworkConnector(user.getPrivatekey());
+        System.out.println(user.toString());
+
+        NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
         
         MyERC20 token = MyERC20.load(
             erc20Address, // request.getErc20Address(),
@@ -48,14 +59,13 @@ public class MyERC20Service {
      */
     public String transfer(MyERC20Request request) throws Exception {
         
-        String erc20Address = env.getProperty("ca.erc20");
-        UserInfoDto sender = userService.getUserInfo(request.getMyId());
+        UserInfo sender = userService.getUser(request.getMyId());
         BigInteger amount = new BigInteger(request.getAmount());  
         
         if(getBalance(request).compareTo(amount) >= 0) {
             // 잔액이 충분한 경우에만 거래 진행
-            UserInfoDto receiver = userService.getUserInfo(request.getReceiverId());
-            NetworkConnector nc = new NetworkConnector(sender.getPrivatekey());
+            UserInfo receiver = userService.getUser(request.getReceiverId());
+            NetworkConnector nc = new NetworkConnector(sender.getPrivateKey());
 
             MyERC20 token = MyERC20.load(
                 erc20Address,
