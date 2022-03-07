@@ -1,13 +1,5 @@
 package com.exercise.marketplace.token.controller;
 
-import java.util.List;
-
-import com.exercise.marketplace.token.request.MyERC721Request;
-import com.exercise.marketplace.token.service.MyERC721Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("erc721")
 public class MyERC721Controller {
     
-    private MyERC721Service service;
+    // private MyERC721Service service;
 
     // @Autowired
     // public MyERC721Controller(MyERC721Service service) {

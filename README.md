@@ -83,6 +83,7 @@ $ ./network.sh start (stop)
 	- 마켓플레이스 응용계층과 연결되는 데이터베이스를 다룬다.
 	- <u>응용 실행 전에 꼭 데이터베이스를 활성화하도록 한다.</u>
 	- 실행방법 : [README.md](marketplace/database/postgresql/README.md)
+	- JPA를 활용해본다 : [Sample Practice](https://www.bezkoder.com/spring-boot-postgresql-example/)
 
 * [contract](marketplace/src/main/java/com/exercise/contract)
     - WrapperClass를 이용해서 클래스 형태로 변환한 스마트 컨트랙트 

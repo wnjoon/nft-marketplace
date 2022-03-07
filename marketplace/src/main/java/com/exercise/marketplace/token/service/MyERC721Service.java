@@ -2,15 +2,6 @@ package com.exercise.marketplace.token.service;
 
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.exercise.contract.MyERC721;
-import com.exercise.marketplace.token.request.MyERC721Request;
-import com.exercise.util.NetworkConnector;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-
 @Service("erc721Service")
 public class MyERC721Service {
     
