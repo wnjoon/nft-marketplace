@@ -31,7 +31,6 @@ public class UserService {
 
     public UserInfo getUser(String user_id) {
         ResponseEntity<UserInfo> userByDatabase = getUserInfo(Long.parseLong(user_id));
-        System.out.println(Long.parseLong(user_id));
         if(userByDatabase.getStatusCode() == HttpStatus.NOT_FOUND) {
             return null;
         }

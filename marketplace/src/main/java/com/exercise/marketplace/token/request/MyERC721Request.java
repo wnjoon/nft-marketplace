@@ -7,7 +7,7 @@ public class MyERC721Request {
     private String tokenId;
     private String url;
 
-	public String getMyId() {
+    public String getMyId() {
 		return this.myId;
 	}
 
@@ -38,6 +38,15 @@ public class MyERC721Request {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+    public MyERC721Request() {}
+
+    public MyERC721Request(String myId, String receiverId, String tokenId, String url) {
+        this.myId = myId;
+        this.receiverId = receiverId;
+        this.tokenId = tokenId;
+        this.url = url;
+    }
 
     /*
      * Request construct for transfer

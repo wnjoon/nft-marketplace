@@ -22,10 +22,8 @@ import lombok.ToString;
 @Table(name = "tb_user")
 public class UserInfo {
     
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
-    // private long id;
     @Id
+    // @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private long user_id;
     
@@ -40,6 +38,4 @@ public class UserInfo {
 
     @Column(name = "privatekey")
     private String privateKey;
-    
-    
 }

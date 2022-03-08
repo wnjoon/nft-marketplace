@@ -38,9 +38,6 @@ public class MyERC20Service {
     public BigInteger getBalance(MyERC20Request request) throws Exception {
        
         UserInfo user = userService.getUser(request.getMyId());        
-
-        System.out.println(user.toString());
-
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
         
         MyERC20 token = MyERC20.load(
