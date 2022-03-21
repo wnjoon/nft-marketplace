@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import com.exercise.contract.MyERC721;
-import com.exercise.marketplace.token.request.MyERC721Request;
+import com.exercise.contract.BanksyToken;
+import com.exercise.marketplace.token.request.BanksyTokenRequest;
 import com.exercise.marketplace.user.model.UserInfo;
 import com.exercise.marketplace.user.service.UserService;
 import com.exercise.util.NetworkConnector;
@@ -17,8 +17,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
-@Service("myERC721Service")
-public class MyERC721Service {
+@Service("banksyTokenService")
+public class BanksyTokenService {
 
     @Autowired
     private Environment env; 
@@ -26,30 +26,30 @@ public class MyERC721Service {
     @Autowired
     private UserService userService;
 
-    private String erc721Address;
+    private String banksyTokenAddress;
 
     @PostConstruct
     public void setupTokenContract() throws InterruptedException {
-        erc721Address = env.getProperty("ca.erc721");
+        banksyTokenAddress = env.getProperty("ca.banksy");
     }
     
     /*
      * mint
      * 특정 계정에 ERC721 발행(minting)
      */
-    public String mint(MyERC721Request request) throws Exception {
+    public String mint(BanksyTokenRequest request) throws Exception {
         
         UserInfo user = userService.getUser(request.getMyId());        
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
         
-        MyERC721 token = MyERC721.load(
-            erc721Address,
+        BanksyToken token = BanksyToken.load(
+            banksyTokenAddress,
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()
         );
 
-        TransactionReceipt receipt = token.mint(user.getAddress(), request.getUrl()).send();
+        TransactionReceipt receipt = token.mint(request.getUrl()).send();
 
         if(receipt.isStatusOK()) {
             return receipt.toString();
@@ -61,13 +61,13 @@ public class MyERC721Service {
      * getTokens
      * 특정 사용자가 보유하고 있는 ERC721 토큰 목록 
      */
-    public List<String> getTokens(MyERC721Request request) throws Exception {
+    public List<String> getTokens(BanksyTokenRequest request) throws Exception {
         
         UserInfo user = userService.getUser(request.getMyId());        
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
 
-        MyERC721 token = MyERC721.load(
-            erc721Address,
+        BanksyToken token = BanksyToken.load(
+            banksyTokenAddress,
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()
@@ -90,13 +90,13 @@ public class MyERC721Service {
      * getBalance
      * 계정의 잔여 ERC721 토큰 갯수 조회
      */
-    public int getBalance(MyERC721Request request) throws Exception {
+    public int getBalance(BanksyTokenRequest request) throws Exception {
         
         UserInfo user = userService.getUser(request.getMyId());        
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
 
-        MyERC721 token = MyERC721.load(
-            erc721Address,
+        BanksyToken token = BanksyToken.load(
+            banksyTokenAddress,
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()
@@ -109,15 +109,15 @@ public class MyERC721Service {
      * transfer
      * ERC721을 계정 간 전송
      */
-    public String transfer(MyERC721Request request) throws Exception {
+    public String transfer(BanksyTokenRequest request) throws Exception {
         
         UserInfo sender = userService.getUser(request.getMyId());     
         UserInfo receiver = userService.getUser(request.getReceiverId());        
    
         NetworkConnector nc = new NetworkConnector(sender.getPrivateKey());
 
-        MyERC721 token = MyERC721.load(
-            erc721Address,
+        BanksyToken token = BanksyToken.load(
+            banksyTokenAddress,
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()
@@ -143,19 +143,19 @@ public class MyERC721Service {
      * getTokenOwner
      * ERC721의 소유자 확인
      */
-    public String getTokenOwner(NetworkConnector nc, MyERC721 token, BigInteger tokenId) throws Exception {
+    public String getTokenOwner(NetworkConnector nc, BanksyToken token, BigInteger tokenId) throws Exception {
         return token.ownerOf(tokenId).send();  
     }
 
     /* 
      * Print Owner of minted tokens
      */
-    public List<String> printTokensOwner(MyERC721Request request) throws Exception {
+    public List<String> printTokensOwner(BanksyTokenRequest request) throws Exception {
         UserInfo user = userService.getUser(request.getMyId());     
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
 
-        MyERC721 token = MyERC721.load(
-            erc721Address,
+        BanksyToken token = BanksyToken.load(
+            banksyTokenAddress,
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()

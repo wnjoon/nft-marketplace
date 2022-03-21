@@ -1,6 +1,6 @@
 package com.exercise.marketplace.token.request;
 
-public class MyERC20Request {
+public class MoneyTokenRequest {
 
     private String myId;
     private String receiverId;
@@ -30,12 +30,12 @@ public class MyERC20Request {
         this.amount = amount;
     }
 
-    public MyERC20Request() {}
+    public MoneyTokenRequest() {}
     
     /*
      * Request construct for transfer
      */
-    public MyERC20Request(String myId, String receiverId, String amount) {
+    public MoneyTokenRequest(String myId, String receiverId, String amount) {
         this.myId = myId;
         this.receiverId = receiverId;
         this.amount = amount;
@@ -44,7 +44,7 @@ public class MyERC20Request {
     /*
      * Request construct for get balance
      */
-    public MyERC20Request(String myId) {
+    public MoneyTokenRequest(String myId) {
         this.myId = myId;
     }
 

@@ -1,6 +1,6 @@
 package com.exercise.marketplace.token.request;
 
-public class MyERC721Request {
+public class BanksyTokenRequest {
     
     private String myId;
     private String receiverId;
@@ -39,9 +39,9 @@ public class MyERC721Request {
 		this.url = url;
 	}
 
-    public MyERC721Request() {}
+    public BanksyTokenRequest() {}
 
-    public MyERC721Request(String myId, String receiverId, String tokenId, String url) {
+    public BanksyTokenRequest(String myId, String receiverId, String tokenId, String url) {
         this.myId = myId;
         this.receiverId = receiverId;
         this.tokenId = tokenId;
@@ -51,7 +51,7 @@ public class MyERC721Request {
     /*
      * Request construct for transfer
      */
-    public MyERC721Request(String myId, String receiverId, String tokenId) {
+    public BanksyTokenRequest(String myId, String receiverId, String tokenId) {
         this.myId = myId;
         this.receiverId = receiverId;
         this.tokenId = tokenId;
@@ -60,14 +60,14 @@ public class MyERC721Request {
     /*
      * Request construct for get tokens of user
      */
-    public MyERC721Request(String myId) {
+    public BanksyTokenRequest(String myId) {
         this.myId = myId;
     }
 
     /*
      * Request construct for mint
      */
-    public MyERC721Request(String myId, String url) {
+    public BanksyTokenRequest(String myId, String url) {
         this.myId = myId;
         this.url = url;
     }

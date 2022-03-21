@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 import javax.annotation.PostConstruct;
 
-import com.exercise.contract.MyERC20;
-import com.exercise.marketplace.token.request.MyERC20Request;
+import com.exercise.contract.MoneyToken;
+import com.exercise.marketplace.token.request.MoneyTokenRequest;
 import com.exercise.marketplace.user.model.UserInfo;
 import com.exercise.marketplace.user.service.UserService;
 import com.exercise.util.NetworkConnector;
@@ -15,8 +15,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
-@Service("myERC20Service")
-public class MyERC20Service {
+@Service("moneyTokenService")
+public class MoneyTokenService {
 
     @Autowired
     private Environment env; 
@@ -24,24 +24,24 @@ public class MyERC20Service {
     @Autowired
     private UserService userService;
 
-    private String erc20Address;
+    private String moneyTokenAddress;
 
     @PostConstruct
     public void setupTokenContract() throws InterruptedException {
-        erc20Address = env.getProperty("ca.erc20");
+        moneyTokenAddress = env.getProperty("ca.money");
     }
     
     /*
      * getBalance
      * 계정의 잔여 ERC20 토큰 갯수 조회
      */
-    public BigInteger getBalance(MyERC20Request request) throws Exception {
+    public BigInteger getBalance(MoneyTokenRequest request) throws Exception {
        
         UserInfo user = userService.getUser(request.getMyId());        
         NetworkConnector nc = new NetworkConnector(user.getPrivateKey());
         
-        MyERC20 token = MyERC20.load(
-            erc20Address, // request.getErc20Address(),
+        MoneyToken token = MoneyToken.load(
+            moneyTokenAddress, 
             nc.getWeb3j(),
             nc.getManager(),
             nc.getGasProvider()
@@ -54,7 +54,7 @@ public class MyERC20Service {
      * transfer
      * ERC20을 계정 간 전송
      */
-    public String transfer(MyERC20Request request) throws Exception {
+    public String transfer(MoneyTokenRequest request) throws Exception {
         
         UserInfo sender = userService.getUser(request.getMyId());
         BigInteger amount = new BigInteger(request.getAmount());  
@@ -64,8 +64,8 @@ public class MyERC20Service {
             UserInfo receiver = userService.getUser(request.getReceiverId());
             NetworkConnector nc = new NetworkConnector(sender.getPrivateKey());
 
-            MyERC20 token = MyERC20.load(
-                erc20Address,
+            MoneyToken token = MoneyToken.load(
+                moneyTokenAddress,
                 nc.getWeb3j(),
                 nc.getManager(),
                 nc.getGasProvider()    
