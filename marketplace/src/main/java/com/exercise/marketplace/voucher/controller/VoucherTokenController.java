@@ -1,5 +1,6 @@
 package com.exercise.marketplace.voucher.controller;
 
+import com.exercise.marketplace.voucher.request.PurchaseVoucherTokenRequest;
 import com.exercise.marketplace.voucher.request.VoucherTokenRequest;
 import com.exercise.marketplace.voucher.service.VoucherTokenService;
 
@@ -19,5 +20,10 @@ public class VoucherTokenController {
     @PostMapping("mint")
     public String mint(@RequestBody VoucherTokenRequest request) throws Exception {
         return service.mintVoucherToken(request);
+    } 
+
+    @PostMapping("purchase")
+    public String purchase(@RequestBody PurchaseVoucherTokenRequest request) throws Exception {
+        return service.purchaseVoucherToken(request);
     } 
 }

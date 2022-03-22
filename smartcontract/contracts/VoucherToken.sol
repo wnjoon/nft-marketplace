@@ -32,6 +32,10 @@ contract VoucherToken is ERC721URIStorage, Ownable {
         Metadata _metadata
     );
 
+    function totalSupply() public view returns (uint256) {
+        return _tokenIds.current();
+    }
+
     /*
      * Swap.sol에서 실행된 purchase 내 ERC721 토큰 구매 부분
      * 로직 마지막에 event 전송 (emit)
@@ -65,6 +69,11 @@ contract VoucherToken is ERC721URIStorage, Ownable {
             revert();
         }
         address tokenOwner = bytesToAddress(data);
+
+        // 해당 토큰을 소유한 사람만이 이를 이용하여 VoucherToken을 만들 수 있도록 함
+        if (tokenOwner != msg.sender) {
+            revert();
+        }
 
         // mint
         _tokenIds.increment();

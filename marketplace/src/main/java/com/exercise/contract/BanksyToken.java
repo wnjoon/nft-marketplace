@@ -96,7 +96,7 @@ public class BanksyToken extends Contract {
 
     static {
         _addresses = new HashMap<String, String>();
-        _addresses.put("13691", "0xa50a51c09a5c451C52BB714527E1974b686D8e77");
+        _addresses.put("13691", "0x5EB5888938e3fE7b334b1838B19C1e828c5148aA");
     }
 
     @Deprecated

@@ -80,7 +80,7 @@ public class MoneyToken extends Contract {
 
     static {
         _addresses = new HashMap<String, String>();
-        _addresses.put("13691", "0x42699A7612A82f1d9C36148af9C77354759b210b");
+        _addresses.put("13691", "0x4245CF4518CB2C280f5e9c6a03c90C147F80B4d9");
     }
 
     @Deprecated
